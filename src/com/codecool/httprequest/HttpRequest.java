@@ -10,8 +10,6 @@ import java.net.URL;
 
 public class HttpRequest {
 
-    private static final String USER_AGENT = "Mozilla/5.0";
-
     private static final String GET_URL = "https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD";
 
     private static final String API_KEY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
@@ -21,7 +19,7 @@ public class HttpRequest {
         StringBuffer response;
         JSONObject JSONresponse;
         response = sendGET();
-        JSONresponse = JSONParse(response);
+        JSONresponse = parseJSON(response);
 
         System.out.println("GET DONE");
     }
@@ -45,6 +43,7 @@ public class HttpRequest {
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
+
                 in.close();
 
             } else {
@@ -57,7 +56,7 @@ public class HttpRequest {
         return response;
     }
 
-    public static JSONObject JSONParse(StringBuffer response) {
+    public static JSONObject parseJSON(StringBuffer response) {
 
         JSONObject JSONresponse = null;
 
