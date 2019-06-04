@@ -5,7 +5,6 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,39 +16,58 @@ public class HttpRequest {
 
     private static final String API_KEY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        sendGET();
+        StringBuffer response;
+        JSONObject JSONresponse;
+        response = sendGET();
+        JSONresponse = JSONParse(response);
+
         System.out.println("GET DONE");
     }
 
-    private static void sendGET() throws IOException {
-        URL obj = new URL(GET_URL);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Authorization", API_KEY);
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        int responseCode = con.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+    private static StringBuffer sendGET() {
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
+        StringBuffer response = null;
 
-            // print result
-            try {
-                JSONObject myresponse = new JSONObject(response.toString());
-                System.out.println(myresponse.getString("Message"));
-            } catch (JSONException e) {
-                System.out.println("error" + e);
+        try {
+            URL obj = new URL(GET_URL);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", API_KEY);
+            int responseCode = con.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) { // success
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+            } else {
+                System.out.println("GET request not worked");
             }
-        } else {
-            System.out.println("GET request not worked");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public static JSONObject JSONParse(StringBuffer response) {
+
+        JSONObject JSONresponse = null;
+
+        try {
+            JSONresponse = new JSONObject(response.toString());
+            System.out.println(JSONresponse.getString("Message"));
+        } catch (JSONException e) {
+            System.out.println("error" + e);
         }
 
+        return JSONresponse;
     }
 }
