@@ -19,7 +19,7 @@ public class HttpRequest {
 
     private static final String API_KEY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
 
-    public static void printTopCryptos(String[] args) {
+    public static void printTopCryptos() {
 
         StringBuffer response;
         JSONObject JSONresponse;
