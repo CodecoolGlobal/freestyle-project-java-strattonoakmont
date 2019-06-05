@@ -2,11 +2,16 @@ package com.codecool.httprequest;
 
 import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONArray;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class HttpRequest {
 
@@ -20,6 +25,8 @@ public class HttpRequest {
         JSONObject JSONresponse;
         response = sendGET();
         JSONresponse = parseJSON(response);
+
+        getListOfCurrencies(JSONresponse);
 
         System.out.println("GET DONE");
     }
@@ -61,11 +68,36 @@ public class HttpRequest {
 
         try {
             JSONresponse = new JSONObject(response.toString());
-            System.out.println(JSONresponse.getString("Message"));
+            // System.out.println(JSONresponse.getJSONArray("Data").getJSONObject(0));
         } catch (JSONException e) {
             System.out.println("error" + e);
         }
 
         return JSONresponse;
+    }
+
+    private static List<Map<String, String>> getListOfCurrencies(JSONObject jsonResponse) {
+
+        List<Map<String, String>> listOfCryptos = null;
+        
+        try {
+            JSONArray jsonArray = jsonResponse.getJSONArray("Data");
+            // System.out.println(jsonArray);
+            listOfCryptos = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++ ) {
+                System.out.println(jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE"));
+                String price = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE");
+
+                HashMap<String,String> myHashMap = new HashMap<String,String>();
+                myHashMap.put("price", price);
+                listOfCryptos.add(myHashMap);
+            }
+
+        } catch (JSONException e) {
+            System.out.println(e);
+        }
+        
+        System.out.println(listOfCryptos);
+        return listOfCryptos;
     }
 }
