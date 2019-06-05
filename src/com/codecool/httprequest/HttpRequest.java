@@ -36,15 +36,14 @@ public class HttpRequest {
             int responseCode = con.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) { // success
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                response = new StringBuffer();
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                    String inputLine;
+                    response = new StringBuffer();
 
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
                 }
-
-                in.close();
 
             } else {
                 System.out.println("GET request not worked");
@@ -56,7 +55,7 @@ public class HttpRequest {
         return response;
     }
 
-    public static JSONObject parseJSON(StringBuffer response) {
+    private static JSONObject parseJSON(StringBuffer response) {
 
         JSONObject JSONresponse = null;
 
