@@ -76,21 +76,41 @@ public class HttpRequest {
         return JSONresponse;
     }
 
-    private static List<Map<String, String>> getListOfCurrencies(JSONObject jsonResponse) {
+    private static List<Map<String, Object>> getListOfCurrencies(JSONObject jsonResponse) {
 
-        List<Map<String, String>> listOfCryptos = null;
+        List<Map<String, Object>> listOfCryptos = null;
         
         try {
             JSONArray jsonArray = jsonResponse.getJSONArray("Data");
             // System.out.println(jsonArray);
             listOfCryptos = new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++ ) {
-                System.out.println(jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE"));
-                String price = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE");
+		String id = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("Id");
+		String fullName = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("FullName");
+		String name = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("Name");
+		String price = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE");
+		String volume24HourUSD = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("VOLUME24HOURTO");
+		String totalVolume24HourUSD = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("TOTALVOLUME24HTO");
+		String marketCap = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("MKTCAP");
+		String changePctDay = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("CHANGEPCTDAY");
+		String symbol = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("FROMSYMBOL");
+		Double rawPrice = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getDouble("PRICE");
+		Integer lastUpdate = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getInt("LASTUPDATE");
+                
+		HashMap<String,Object> myHashMap = new HashMap<String,Object>();
+		        myHashMap.put("id", id);
+		        myHashMap.put("fullName", fullName);
+		        myHashMap.put("name", name);
+		        myHashMap.put("price", price);
+		        myHashMap.put("volume24HourUSD", volume24HourUSD);
+		        myHashMap.put("totalVolume24HourUSD", totalVolume24HourUSD);
+			myHashMap.put("marketCap", marketCap);
+			myHashMap.put("changePctDay", changePctDay);
+			myHashMap.put("symbol", symbol);
+			myHashMap.put("rawPrice", rawPrice);
+			myHashMap.put("lastUpdate", lastUpdate);
 
-                HashMap<String,String> myHashMap = new HashMap<String,String>();
-                myHashMap.put("price", price);
-                listOfCryptos.add(myHashMap);
+		listOfCryptos.add(myHashMap);
             }
 
         } catch (JSONException e) {
