@@ -19,12 +19,19 @@ public class showTable {
 				marketCapLength = crypto.get("marketCap").toString().length();
 			}
 		}
+
 		fullNameLength = fullNameLength > headerFullName.length() ? fullNameLength : headerFullName.length();
 		marketCapLength = marketCapLength > headerMarketCap.length() ? marketCapLength : headerMarketCap.length();
 		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
 		System.out.println("|  " + headerFullName + "  |  " + headerMarketCap + "  |");
 		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
-		
+
+		for (Map<String, Object> crypto : simpleListCrypto){
+			System.out.printf("|   %" + fullNameLength*(-1) + "s |  %" + marketCapLength + "s  |\n", crypto.get("fullName"), crypto.get("marketCap"));
+			System.out.println("|--" + "-".repeat(fullNameLength) + "-----" + "-".repeat(marketCapLength) + "--|");
+
+		}
+
 	}
 
 	public static void printDetailedTable(List<Map<String, Object>> detailedListCrypto) {
