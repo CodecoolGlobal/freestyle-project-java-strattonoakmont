@@ -1,5 +1,5 @@
 import java.util.*;
-import com.codecool.httprequest.Currency;
+import com.codecool.currency.Currency;
 import static com.codecool.selecter.DataSelecter.simple;
 import static com.codecool.selecter.DataSelecter.detailed;
 import static com.codecool.display.showTable.printSimpleTable;
@@ -11,7 +11,7 @@ public class MainMenu {
     private static final String API_KEY_CRYPTOCURRENCY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
   public static void main (String[] args){
 
-
+    System.out.print("\033[H\033[2J");
     System.out.println("Stratton Oakmont CryptoCurrency Checker\n");
     System.out.println("Menu Options:");
     System.out.println("1. Top 10 Cryptocurrencies");
@@ -26,11 +26,15 @@ public class MainMenu {
     if(input < 0 || input > 5) {
         System.out.println("You have entered an invalid selection, please try again\n");
     } else if(input == 1) {
-	printSimpleTable(simple(getCryptos()));
+        System.out.print("\033[H\033[2J");
+    Currency cryptoCurrency = new Currency();
+    List<Map<String, Object>> cryptos = cryptoCurrency.getCurrency(URL_CRYPTOCURRENCY, API_KEY_CRYPTOCURRENCY);
+    printSimpleTable(simple(cryptos));
+    // System.out.flush();
     } else if (input == 2) {
-	printSimpleTable(simple(getCryptos()));
+	// printSimpleTable(simple(getCryptos()));
     } else if (input == 3) {
-	printDetailedTable(detailed(getCryptos()));
+	// printDetailedTable(detailed(getCryptos()));
     } else if(input == 4) {
         System.out.println("You have quit the program\n");
         System.exit(1);
@@ -39,3 +43,4 @@ public class MainMenu {
     }
     }
   }
+  

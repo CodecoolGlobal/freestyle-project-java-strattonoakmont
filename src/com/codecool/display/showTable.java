@@ -27,8 +27,11 @@ public class showTable {
 		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
 
 		for (Map<String, Object> crypto : simpleListCrypto){
-			System.out.printf("|   %" + fullNameLength*(-1) + "s |  %" + marketCapLength + "s  |\n", crypto.get("fullName"), crypto.get("marketCap"));
-			System.out.println("|--" + "-".repeat(fullNameLength) + "-----" + "-".repeat(marketCapLength) + "--|");
+			System.out.printf("|   %" + fullNameLength*(-1) + "s |  %" + marketCapLength + "s  |", crypto.get("fullName"), crypto.get("marketCap"));
+            if ((boolean) crypto.get("select") == true) {
+                System.out.print(" <--");
+            }
+            System.out.println("\n|--" + "-".repeat(fullNameLength) + "-----" + "-".repeat(marketCapLength) + "--|");
 
 		}
 

@@ -8,13 +8,15 @@ public class DataSelecter {
 
 	public static List<Map<String, Object>> simple (List<Map<String, Object>> listOfCryptos) {
 
-		List<Map<String, Object>> simpleListCrypto = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> simpleListCrypto = new ArrayList<Map<String, Object>>();
 		for (Map<String, Object> crypto : listOfCryptos) {
 			HashMap<String,Object> tempHashMap = new HashMap<String,Object>();
 			tempHashMap.put("fullName", crypto.get("fullName"));
-			tempHashMap.put("marketCap", crypto.get("marketCap"));
+            tempHashMap.put("marketCap", crypto.get("marketCap"));
+            tempHashMap.put("select", false);
 			simpleListCrypto.add(tempHashMap);
-		}
+        }
+        simpleListCrypto.get(0).replace("select", true);
 		// System.out.print(simpleListCrypto);
 
 		return simpleListCrypto;

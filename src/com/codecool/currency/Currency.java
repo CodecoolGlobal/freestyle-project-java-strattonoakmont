@@ -1,4 +1,4 @@
-package com.codecool.httprequest;
+package com.codecool.currency;
 
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -23,9 +23,9 @@ public class Currency {
     private static final String URL_CRYPTOCURRENCY = "https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD";
     private static final String API_KEY_CRYPTOCURRENCY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
     
-    public Currency(String url, String api_key) {
-        this.url = url;
-        this.api_key = api_key;
+    public Currency() {
+        // this.url = url;
+        // this.api_key = api_key;
         // this.currencyList = getCurrency(this.url,this.api_key);
     }
     
@@ -34,7 +34,7 @@ public class Currency {
     public List<Map<String, Object>> getCurrency(String url, String api_key) {
 
         // Currency cryptoCurrency = new Currency(URL_CRYPTOCURRENCY, API_KEY_CRYPTOCURRENCY);
-        StringBuffer cryptoResponse = sendGET(this.url, this.api_key);
+        StringBuffer cryptoResponse = sendGET(url, api_key);
         JSONObject cryptoJSON = parseJSON(cryptoResponse);
         return getListOfCurrencies(cryptoJSON);
     }
@@ -120,7 +120,6 @@ public class Currency {
                 myHashMap.put("symbol", symbol);
                 myHashMap.put("rawPrice", rawPrice);
                 myHashMap.put("lastUpdate", lastUpdate);
-                myHashMap.put("select", null);
 
                 listOfCryptos.add(myHashMap);
             }
