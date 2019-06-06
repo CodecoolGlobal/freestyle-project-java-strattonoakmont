@@ -19,12 +19,19 @@ public class showTable {
 				marketCapLength = crypto.get("marketCap").toString().length();
 			}
 		}
+
 		fullNameLength = fullNameLength > headerFullName.length() ? fullNameLength : headerFullName.length();
 		marketCapLength = marketCapLength > headerMarketCap.length() ? marketCapLength : headerMarketCap.length();
 		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
 		System.out.println("|  " + headerFullName + "  |  " + headerMarketCap + "  |");
 		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
-		
+
+		for (Map<String, Object> crypto : simpleListCrypto){
+			System.out.printf("|   %" + fullNameLength*(-1) + "s |  %" + marketCapLength + "s  |\n", crypto.get("fullName"), crypto.get("marketCap"));
+			System.out.println("|--" + "-".repeat(fullNameLength) + "-----" + "-".repeat(marketCapLength) + "--|");
+
+		}
+
 	}
 
 	public static void printDetailedTable(List<Map<String, Object>> detailedListCrypto) {
@@ -37,6 +44,16 @@ public class showTable {
 		int changePctDayLength = 0;
 		int volume24HourUSDLength = 0;
 		int marketCapLength = 0;
+		int valueMaxLength = 0;
+		String headerFullName = "Cryptocurrency name";
+		String headerName = "Abbreviation";
+		String headerSymbol = "Symbol";
+		String headerPrice = "Price";
+		String headerVolume24HourUSD = "Total direct coin - USD volume";
+		String headerTotalVolume24HourUSD = "Total direct coin - all markets";
+		String headerMarketCap = "Market Cap";
+		String headerChangePctDay = "Changed in last 24 hours";
+		String headerLastUpdate = "Last Updated";
 
 		for (Map<String, Object> crypto : detailedListCrypto) {
 			if (crypto.get("fullName").toString().length() > fullNameLength) {
@@ -59,5 +76,58 @@ public class showTable {
 				marketCapLength = crypto.get("marketCap").toString().length();
 			}
 		}
+
+		for (Map<String, Object> crypto : detailedListCrypto) {
+			if (crypto.get("fullName").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("fullName").toString().length();
+			} if (crypto.get("totalVolume24HourUSD").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("totalVolume24HourUSD").toString().length();
+			} if (crypto.get("symbol").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("symbol").toString().length();
+			} if (crypto.get("price").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("price").toString().length();
+			} if (crypto.get("lastUpdate").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("lastUpdate").toString().length();
+			} if (crypto.get("name").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("name").toString().length();
+			} if (crypto.get("changePctDay").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("changePctDay").toString().length();
+			} if (crypto.get("volume24HourUSD").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("volume24HourUSD").toString().length();
+			} if (crypto.get("marketCap").toString().length() > valueMaxLength) {
+				valueMaxLength = crypto.get("marketCap").toString().length();
+			}
+		}
+
+
+		//fullNameLength = fullNameLength > headerFullName.length() ? fullNameLength : headerFullName.length();
+		//nameLength = nameLength > headerName.length() ? nameLength : headerName.length();
+		//symbolLength = symbolLength > headerSymbol.length() ? symbolLength : headerSymbol.length();
+		//priceLength = priceLength > headerPrice.length() ? priceLength : headerPrice.length();
+		//volume24HourUSDLength = volume24HourUSDLength > headerVolume24HourUSD.length() ? volume24HourUSDLength : 	headerVolume24HourUSD.length();
+		//totalVolume24HourUSDLength = totalVolume24HourUSDLength > headerTotalVolume24HourUSD.length() ? totalVolume24HourUSDLength : headerTotalVolume24HourUSD.length();
+		//marketCapLength = marketCapLength > headerMarketCap.length() ? marketCapLength : headerMarketCap.length();
+		//changePctDayLength = changePctDayLength > headerChangePctDay.length() ? changePctDayLength : headerChangePctDay.length();
+		//lastUpdateLength = lastUpdateLength > headerLastUpdate.length() ? lastUpdateLength : headerLastUpdate.length();
+
+		System.out.println("+--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "--+--" + "-".repeat(valueMaxLength) + "--+");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerFullName, detailedListCrypto.get(0).get("fullName"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerName, detailedListCrypto.get(0).get("name"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerSymbol, detailedListCrypto.get(0).get("symbol"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerPrice, detailedListCrypto.get(0).get("price"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerVolume24HourUSD, detailedListCrypto.get(0).get("volume24HourUSD"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerTotalVolume24HourUSD, detailedListCrypto.get(0).get("totalVolume24HourUSD"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerMarketCap, detailedListCrypto.get(0).get("marketCap"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerChangePctDay, detailedListCrypto.get(0).get("changePctDay"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
+		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerLastUpdate, detailedListCrypto.get(0).get("lastUpdate"));
+		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
 	}
 }
