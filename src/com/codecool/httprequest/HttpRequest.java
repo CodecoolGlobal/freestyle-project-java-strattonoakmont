@@ -81,34 +81,38 @@ public class HttpRequest {
         try {
             JSONArray jsonArray = jsonResponse.getJSONArray("Data");
             listOfCryptos = new ArrayList<>();
-            for (int i = 0; i < jsonArray.length(); i++ ) {
-		String id = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("Id");
-		String fullName = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("FullName");
-		String name = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("Name");
-		String price = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE");
-		String volume24HourUSD = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("VOLUME24HOURTO");
-		String totalVolume24HourUSD = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("TOTALVOLUME24HTO");
-		String marketCap = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("MKTCAP");
-		String changePctDay = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("CHANGEPCTDAY");
-		String symbol = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("FROMSYMBOL");
-		Double rawPrice = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getDouble("PRICE");
-		Long lastUpdate = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getLong("LASTUPDATE");
+            for (int i = 0; i < jsonArray.length(); i++) {
 
-		HashMap<String,Object> myHashMap = new HashMap<String,Object>();
-		        myHashMap.put("id", id);
-		        myHashMap.put("fullName", fullName);
-		        myHashMap.put("name", name);
-		        myHashMap.put("price", price);
-		        myHashMap.put("volume24HourUSD", volume24HourUSD);
-		        myHashMap.put("totalVolume24HourUSD", totalVolume24HourUSD);
-			myHashMap.put("marketCap", marketCap);
-			myHashMap.put("changePctDay", changePctDay);
-			myHashMap.put("symbol", symbol);
-			myHashMap.put("rawPrice", rawPrice);
-			myHashMap.put("lastUpdate", lastUpdate);
-			myHashMap.put("select", null);
+                JSONObject item = jsonArray.getJSONObject(i);
 
-		listOfCryptos.add(myHashMap);
+                String id = item.getJSONObject("CoinInfo").getString("Id");
+                String fullName = item.getJSONObject("CoinInfo").getString("FullName");
+                String name = item.getJSONObject("CoinInfo").getString("Name");
+                String price = item.getJSONObject("DISPLAY").getJSONObject("USD").getString("PRICE");
+                String volume24HourUSD = item.getJSONObject("DISPLAY").getJSONObject("USD").getString("VOLUME24HOURTO");
+                String totalVolume24HourUSD = item.getJSONObject("DISPLAY").getJSONObject("USD")
+                        .getString("TOTALVOLUME24HTO");
+                String marketCap = item.getJSONObject("DISPLAY").getJSONObject("USD").getString("MKTCAP");
+                String changePctDay = item.getJSONObject("DISPLAY").getJSONObject("USD").getString("CHANGEPCTDAY");
+                String symbol = item.getJSONObject("DISPLAY").getJSONObject("USD").getString("FROMSYMBOL");
+                Double rawPrice = item.getJSONObject("RAW").getJSONObject("USD").getDouble("PRICE");
+                Long lastUpdate = item.getJSONObject("RAW").getJSONObject("USD").getLong("LASTUPDATE");
+
+                HashMap<String, Object> myHashMap = new HashMap<String, Object>();
+                myHashMap.put("id", id);
+                myHashMap.put("fullName", fullName);
+                myHashMap.put("name", name);
+                myHashMap.put("price", price);
+                myHashMap.put("volume24HourUSD", volume24HourUSD);
+                myHashMap.put("totalVolume24HourUSD", totalVolume24HourUSD);
+                myHashMap.put("marketCap", marketCap);
+                myHashMap.put("changePctDay", changePctDay);
+                myHashMap.put("symbol", symbol);
+                myHashMap.put("rawPrice", rawPrice);
+                myHashMap.put("lastUpdate", lastUpdate);
+                myHashMap.put("select", null);
+
+                listOfCryptos.add(myHashMap);
             }
 
         } catch (JSONException e) {
