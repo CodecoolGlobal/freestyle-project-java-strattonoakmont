@@ -4,6 +4,7 @@ import static com.codecool.selecter.DataSelecter.simple;
 import static com.codecool.selecter.DataSelecter.detailed;
 import static com.codecool.display.showTable.printSimpleTable;
 import static com.codecool.display.showTable.printDetailedTable;
+import static com.codecool.credits.Credits.credits;
 
 public class MainMenu {
 
@@ -26,15 +27,15 @@ public class MainMenu {
     if(input < 0 || input > 5) {
         System.out.println("You have entered an invalid selection, please try again\n");
     } else if(input == 1) {
-        System.out.print("\033[H\033[2J");
+    System.out.print("\033[H\033[2J");
     Currency cryptoCurrency = new Currency();
     List<Map<String, Object>> cryptos = cryptoCurrency.getCurrency(URL_CRYPTOCURRENCY, API_KEY_CRYPTOCURRENCY);
     printSimpleTable(simple(cryptos));
-    // System.out.flush();
     } else if (input == 2) {
 	// printSimpleTable(simple(getCryptos()));
     } else if (input == 3) {
-	// printDetailedTable(detailed(getCryptos()));
+	System.out.print("\033[H\033[2J");	
+	credits();
     } else if(input == 4) {
         System.out.println("You have quit the program\n");
         System.exit(1);
