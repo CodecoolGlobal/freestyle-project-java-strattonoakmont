@@ -77,7 +77,7 @@ public class HttpRequest {
     private static List<Map<String, Object>> getListOfCurrencies(JSONObject jsonResponse) {
 
         List<Map<String, Object>> listOfCryptos = null;
-        
+
         try {
             JSONArray jsonArray = jsonResponse.getJSONArray("Data");
             listOfCryptos = new ArrayList<>();
@@ -92,8 +92,8 @@ public class HttpRequest {
 		String changePctDay = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("CHANGEPCTDAY");
 		String symbol = jsonArray.getJSONObject(i).getJSONObject("DISPLAY").getJSONObject("USD").getString("FROMSYMBOL");
 		Double rawPrice = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getDouble("PRICE");
-		Integer lastUpdate = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getInt("LASTUPDATE");
-                
+		Long lastUpdate = jsonArray.getJSONObject(i).getJSONObject("RAW").getJSONObject("USD").getLong("LASTUPDATE");
+
 		HashMap<String,Object> myHashMap = new HashMap<String,Object>();
 		        myHashMap.put("id", id);
 		        myHashMap.put("fullName", fullName);
@@ -114,7 +114,7 @@ public class HttpRequest {
         } catch (JSONException e) {
             System.out.println(e);
         }
-        
+
         return listOfCryptos;
     }
 }

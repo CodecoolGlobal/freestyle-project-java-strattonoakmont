@@ -1,6 +1,8 @@
 import java.util.*;
 import static com.codecool.httprequest.HttpRequest.getCryptos;
 import static com.codecool.selecter.DataSelecter.simple;
+import static com.codecool.selecter.DataSelecter.detailed;
+
 
 public class MainMenu {
 
@@ -24,7 +26,7 @@ public class MainMenu {
     } else if(input == 1) {
 	getCryptos();
     } else if (input == 2) {
-	simple(getCryptos());
+	detailed(getCryptos());
     } else if(input == 5) {
         System.out.println("You have quit the program\n");
         System.exit(1);
