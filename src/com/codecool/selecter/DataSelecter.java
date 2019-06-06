@@ -15,7 +15,7 @@ public class DataSelecter {
 			tempHashMap.put("marketCap", crypto.get("marketCap"));
 			simpleListCrypto.add(tempHashMap);
 		}
-		System.out.print(simpleListCrypto);
+		// System.out.print(simpleListCrypto);
 
 		return simpleListCrypto;
 	}
@@ -40,7 +40,7 @@ public class DataSelecter {
 			tempHashMap.put("marketCap", crypto.get("marketCap"));
 			detailedListCrypto.add(tempHashMap);
 		}
-		System.out.print(detailedListCrypto);
+		// System.out.print(detailedListCrypto);
 
 		return detailedListCrypto;
 	}

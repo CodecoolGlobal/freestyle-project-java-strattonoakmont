@@ -8,14 +8,23 @@ public class showTable {
 	public static void printSimpleTable(List<Map<String, Object>> simpleListCrypto) {
 		int fullNameLength = 0;
 		int marketCapLength = 0;
-		
+		String headerFullName = "Top Ten Cryptocurrencies";
+		String headerMarketCap = "Market Cap";
+
 		for (Map<String, Object> crypto : simpleListCrypto) {
 			if (crypto.get("fullName").toString().length() > fullNameLength) {
 				fullNameLength = crypto.get("fullName").toString().length();
-			} if (crypto.get("marketCap").toString().length() > marketCapLength) {
+			}
+			if (crypto.get("marketCap").toString().length() > marketCapLength) {
 				marketCapLength = crypto.get("marketCap").toString().length();
 			}
-		}		
+		}
+		fullNameLength = fullNameLength > headerFullName.length() ? fullNameLength : headerFullName.length();
+		marketCapLength = marketCapLength > headerMarketCap.length() ? marketCapLength : headerMarketCap.length();
+		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
+		System.out.println("|  " + headerFullName + "  |  " + headerMarketCap + "  |");
+		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(marketCapLength) + "--+");
+		
 	}
 
 	public static void printDetailedTable(List<Map<String, Object>> detailedListCrypto) {
@@ -28,8 +37,8 @@ public class showTable {
 		int changePctDayLength = 0;
 		int volume24HourUSDLength = 0;
 		int marketCapLength = 0;
-		
-		for (Map<String, Object> crypto : detailedListCrypto) {			
+
+		for (Map<String, Object> crypto : detailedListCrypto) {
 			if (crypto.get("fullName").toString().length() > fullNameLength) {
 				fullNameLength = crypto.get("fullName").toString().length();
 			} if (crypto.get("totalVolume24HourUSD").toString().length() > totalVolume24HourUSDLength) {
