@@ -16,6 +16,7 @@ public class DataSelecter {
 			simpleListCrypto.add(tempHashMap);
 		}
 		System.out.print(simpleListCrypto);
+
 		return simpleListCrypto;
 	}
 
