@@ -47,5 +47,19 @@ public class DataSelecter {
 		return detailedListCrypto;
 	}
 
+	public static List<Map<String, Object>> converted (List<Map<String, Object>> listOfCryptos) {
+
+        List<Map<String, Object>> convertListCrypto = new ArrayList<Map<String, Object>>();
+		for (Map<String, Object> crypto : listOfCryptos) {
+			HashMap<String,Object> tempHashMap = new HashMap<String,Object>();
+			tempHashMap.put("fullName", crypto.get("fullName"));
+            		tempHashMap.put("price", crypto.get("price"));
+			Double huf = (Double) crypto.get("rawPrice");
+            		tempHashMap.put("rawPrice", huf * 284);
+			convertListCrypto.add(tempHashMap);
+        	}
+		return convertListCrypto;
+	}
+
 
 }

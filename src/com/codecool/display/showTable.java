@@ -133,4 +133,38 @@ public class showTable {
 		System.out.printf("|   %" + headerTotalVolume24HourUSD.length()*(-1) + "s |  %" + valueMaxLength + "s  |\n", headerLastUpdate, detailedListCrypto.get(0).get("lastUpdate"));
 		System.out.println("|--" + "-".repeat(headerTotalVolume24HourUSD.length()) + "-----" + "-".repeat(valueMaxLength) + "--|");
 	}
+
+	public static void printConvertedTable(List<Map<String, Object>> convertListCrypto) {
+		int fullNameLength = 0;
+		int priceLength = 0;
+		int hufLength = 0;
+		String headerFullName = "Top Ten Cryptocurrencies";
+		String headerPriceUSD = "Price USD";
+		String headerPriceHUF = "Price HUF";
+
+		for (Map<String, Object> crypto : convertListCrypto) {
+			if (crypto.get("fullName").toString().length() > fullNameLength) {
+				fullNameLength = crypto.get("fullName").toString().length();
+			}
+			if (crypto.get("price").toString().length() > priceLength) {
+				priceLength = crypto.get("price").toString().length();
+			}
+			if (crypto.get("rawPrice").toString().length() > hufLength) {
+				hufLength = crypto.get("rawPrice").toString().length();
+			}
+		}
+
+		fullNameLength = fullNameLength > headerFullName.length() ? fullNameLength : headerFullName.length();
+		priceLength = priceLength > headerPriceUSD.length() ? priceLength : headerPriceUSD.length();
+		hufLength = hufLength > headerPriceHUF.length() ? hufLength : headerPriceHUF.length();
+		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(priceLength) + "--+--" + "-".repeat(hufLength) + "--+");
+		System.out.println("|  " + headerFullName + "  |  " + headerPriceUSD + "  |  " + headerPriceHUF + "  |");
+		System.out.println("+--" + "-".repeat(fullNameLength) + "--+--" + "-".repeat(priceLength) + "--+--" + "-".repeat(hufLength) + "--+");
+
+		for (Map<String, Object> crypto : convertListCrypto){
+			System.out.printf("|   %" + fullNameLength*(-1) + "s |  %" + priceLength + "s |  %" + hufLength + "s   |", crypto.get("fullName"), crypto.get("price"), crypto.get("rawPrice"));
+            		System.out.println("\n|--" + "-".repeat(fullNameLength) + "-----" + "-".repeat(priceLength) + "-----" + "-".repeat(hufLength) + "--|");
+		}
+
+	}
 }
