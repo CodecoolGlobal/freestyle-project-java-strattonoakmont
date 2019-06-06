@@ -19,16 +19,14 @@ public class HttpRequest {
 
     private static final String API_KEY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
 
-    public static void printTopCryptos() {
+    public static List<Map<String, Object>> getCryptos() {
 
         StringBuffer response;
         JSONObject JSONresponse;
         response = sendGET();
         JSONresponse = parseJSON(response);
 
-        getListOfCurrencies(JSONresponse);
-
-        System.out.println("GET DONE");
+        return getListOfCurrencies(JSONresponse);
     }
 
     private static StringBuffer sendGET() {
@@ -82,7 +80,6 @@ public class HttpRequest {
         
         try {
             JSONArray jsonArray = jsonResponse.getJSONArray("Data");
-            // System.out.println(jsonArray);
             listOfCryptos = new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++ ) {
 		String id = jsonArray.getJSONObject(i).getJSONObject("CoinInfo").getString("Id");
@@ -109,6 +106,7 @@ public class HttpRequest {
 			myHashMap.put("symbol", symbol);
 			myHashMap.put("rawPrice", rawPrice);
 			myHashMap.put("lastUpdate", lastUpdate);
+			myHashMap.put("select", null);
 
 		listOfCryptos.add(myHashMap);
             }
@@ -117,7 +115,6 @@ public class HttpRequest {
             System.out.println(e);
         }
         
-        System.out.println(listOfCryptos);
         return listOfCryptos;
     }
 }
