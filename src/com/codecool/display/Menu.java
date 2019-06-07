@@ -3,15 +3,13 @@ package com.codecool.display;
 import java.util.*;
 import com.codecool.credits.*;
 import com.codecool.selecter.*;
-import com.codecool.display.*;
-import com.codecool.currency.*;
 import com.codecool.currency.Currency;
 
 public class Menu {
 
     public static final Scanner scanner = new Scanner(System.in);
 
-    public static void showMenu() {
+    public void showMenu() {
         System.out.print("\033[H\033[2J");
         System.out.println("Stratton Oakmont CryptoCurrency Checker\n");
         System.out.println("Menu Options:");
@@ -23,7 +21,7 @@ public class Menu {
 
     }
 
-    public static void startBasicTable(List<Map<String, Object>> cryptos) {
+    public void startBasicTable(List<Map<String, Object>> cryptos) {
 
         while (true) {
             try {
@@ -44,7 +42,7 @@ public class Menu {
         }
     }
 
-    public static void startConvertedTable(List<Map<String, Object>> cryptos) {
+    public void startConvertedTable(List<Map<String, Object>> cryptos) {
         Table.printConvertedTable(DataSelecter.converted(cryptos));
         while (true) {
             try {
@@ -62,7 +60,7 @@ public class Menu {
         }
     }
 
-    public static void startCredits() {
+    public void startCredits() {
         Credits.showCredits();
         while (true) {
             try {
@@ -79,11 +77,11 @@ public class Menu {
         }
     }
 
-    public static void chooseMenu() {
+    public void chooseMenu() {
 
         int input = scanner.nextInt();
         Currency CryptoCurrency = new Currency();
-        List<Map<String, Object>> cryptos = CryptoCurrency.getCurrency(Currency.API_KEY_CRYPTOCURRENCY, Currency.API_KEY_CRYPTOCURRENCY );
+        List<Map<String, Object>> cryptos = CryptoCurrency.getCurrency(Currency.URL_CRYPTOCURRENCY,Currency.API_KEY_CRYPTOCURRENCY);
 
 
         
@@ -98,6 +96,7 @@ public class Menu {
         } else if (input == 4) {
             System.out.println("You have quit the program\n");
             System.exit(1);
+            scanner.close();
         } else {
             System.out.println("error");
 

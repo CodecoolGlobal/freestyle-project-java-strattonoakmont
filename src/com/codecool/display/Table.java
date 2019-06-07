@@ -1,6 +1,5 @@
 package com.codecool.display;
 
-import com.codecool.selecter.DataSelecter.*;
 import java.util.*;
 
 public class Table {

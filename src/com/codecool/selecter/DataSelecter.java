@@ -1,8 +1,6 @@
 package com.codecool.selecter;
 
 import java.util.*;
-import java.sql.Timestamp;
-import java.lang.*;
 
 public class DataSelecter {
 
