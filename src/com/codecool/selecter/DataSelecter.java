@@ -30,7 +30,6 @@ public class DataSelecter {
 			tempHashMap.put("fullName", crypto.get("fullName"));
 			tempHashMap.put("totalVolume24HourUSD", crypto.get("totalVolume24HourUSD"));
 			tempHashMap.put("symbol", crypto.get("symbol"));
-			tempHashMap.put("select", crypto.get("select"));
 			tempHashMap.put("price", crypto.get("price"));
 			long lastUpdate = (Long) crypto.get("lastUpdate");
 			Date lastUpdateDate = new java.util.Date(lastUpdate * 1000);

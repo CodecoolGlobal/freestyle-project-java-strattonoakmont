@@ -15,25 +15,11 @@ import java.util.HashMap;
 
 public class Currency {
 
-    String url;
-    String api_key;
-    List<Map<String, Object>> currencyList;
-
-    
-    private static final String URL_CRYPTOCURRENCY = "https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD";
-    private static final String API_KEY_CRYPTOCURRENCY = "0081703480f82a60b595181a70323ac1065be2ed0aefa6ce538de6b8a24d6108";
-    
     public Currency() {
-        // this.url = url;
-        // this.api_key = api_key;
-        // this.currencyList = getCurrency(this.url,this.api_key);
     }
     
-    
-
     public List<Map<String, Object>> getCurrency(String url, String api_key) {
 
-        // Currency cryptoCurrency = new Currency(URL_CRYPTOCURRENCY, API_KEY_CRYPTOCURRENCY);
         StringBuffer cryptoResponse = sendGET(url, api_key);
         JSONObject cryptoJSON = parseJSON(cryptoResponse);
         return getListOfCurrencies(cryptoJSON);

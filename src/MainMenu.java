@@ -1,12 +1,8 @@
 import java.util.*;
 import com.codecool.currency.Currency;
-import static com.codecool.selecter.DataSelecter.simple;
-import static com.codecool.selecter.DataSelecter.detailed;
-import static com.codecool.selecter.DataSelecter.converted;
-import static com.codecool.display.Table.printSimpleTable;
-import static com.codecool.display.Table.printDetailedTable;
-import static com.codecool.display.Table.printConvertedTable;
-import static com.codecool.credits.Credits.credits;
+import static com.codecool.selecter.DataSelecter.*;
+import static com.codecool.display.Table.*;
+import static com.codecool.credits.Credits.showCredits;
 import java.io.IOException;
 
 public class MainMenu {
@@ -32,15 +28,14 @@ public class MainMenu {
     }
 
     public static void startSimpleTable() {
-        
-        printSimpleTable(simple(cryptos));
-        
+
         while (true) {
             try {
+                printSimpleTable(simple(cryptos));
                 int input = scanner.nextInt();
                 if (input >= 1 && input <= 10) {
-                    printDetailedTable(detailed(cryptos), input -1);
-                } else if (input ==0) {
+                    printDetailedTable(detailed(cryptos), input - 1);
+                } else if (input == 0) {
                     break;
                 } else {
                     System.out.println("Try a number between range [1 - 10]\nOr press 0 to go Back");
@@ -60,33 +55,51 @@ public class MainMenu {
                 int input = scanner.nextInt();
                 if (input == 0) {
                     break;
+                } else {
+                    System.out.println("Press 0 to go Back");
                 }
-            } catch (Exception e) {
-                // TODO: handle exception
+
+            } catch (InputMismatchException e) {
+                System.out.println("Try a number please");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    public static void startCredits() {
+        showCredits();
+        while (true) {
+            try {
+                int input = scanner.nextInt();
+                if (input == 0) {
+                    break;
+                } else {
+                    System.out.println("Press 0 to go Back");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Try a number please");
+                scanner.nextLine();
             }
         }
     }
 
     public static void chooseMenu() {
-        
+
         int input = scanner.nextInt();
         if (input < 0 || input > 5) {
             System.out.println("You have entered an invalid selection, please try again\n");
         } else if (input == 1) {
             startSimpleTable();
         } else if (input == 2) {
-            // System.out.print("\033[H\033[2J");
-            // printConvertedTable(converted(cryptos));
             startConvertedTable();
         } else if (input == 3) {
-            // System.out.print("\033[H\033[2J");
-            credits();
+            startCredits();
         } else if (input == 4) {
             System.out.println("You have quit the program\n");
             System.exit(1);
         } else {
             System.out.println("error");
-            
+
             throw new InputMismatchException();
         }
     }
